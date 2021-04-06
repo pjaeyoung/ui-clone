@@ -1,0 +1,165 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #3da7f5;
+}
+
+.wrap {
+  width: 100%;
+  height: 100vh;
+}
+
+.loading {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  animation: rotateCircle 2.5s infinite linear forwards;
+  animation-play-state: running;
+}
+
+.rocket {
+  width: min-content;
+  font-size: 25px;
+}
+
+.rocket i {
+  color: white;
+}
+
+@keyframes rotateCircle {
+  from {
+    transform: rotateZ(0deg);
+  }
+  to {
+    transform: rotateZ(359deg);
+  }
+}
+
+.smoke_arr {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.smoke {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: white;
+  transform: scale(0);
+  animation: smoke_scale 2.5s infinite forwards;
+  animation-play-state: running;
+}
+
+.smoke:nth-of-type(1) {
+  top: 2px;
+  left: 15px;
+  animation-delay: 0.1s;
+}
+
+.smoke:nth-of-type(2) {
+  top: 18px;
+  left: 0px;
+}
+
+.smoke:nth-of-type(3) {
+  top: 35px;
+  left: -5px;
+  animation-delay: 2.5s;
+}
+
+.smoke:nth-of-type(4) {
+  top: 55px;
+  left: -5px;
+  animation-delay: 2.2s;
+}
+
+.smoke:nth-of-type(5) {
+  top: 75px;
+  left: 5px;
+  animation-delay: 2s;
+}
+
+.smoke:nth-of-type(6) {
+  top: 85px;
+  left: 30px;
+  animation-delay: 1.8s;
+}
+
+.smoke:nth-of-type(7) {
+  top: 85px;
+  left: 55px;
+  animation-delay: 1.5s;
+}
+
+.smoke:nth-of-type(8) {
+  top: 75px;
+  left: 75px;
+  animation-delay: 1.4s;
+}
+
+.smoke:nth-of-type(9) {
+  top: 55px;
+  left: 85px;
+  animation-delay: 1.2s;
+}
+
+.smoke:nth-of-type(10) {
+  top: 35px;
+  left: 90px;
+  animation-delay: 1s;
+}
+
+.smoke:nth-of-type(11) {
+  top: 15px;
+  left: 80px;
+  animation-delay: 0.8s;
+}
+
+.smoke:nth-of-type(12) {
+  top: 0px;
+  left: 70px;
+  animation-delay: 0.5s;
+}
+
+.smoke:nth-of-type(13) {
+  top: -6px;
+  left: 30px;
+  animation-delay: 0.2s;
+}
+
+.smoke:nth-of-type(14) {
+  top: -6px;
+  left: 50px;
+  animation-delay: 0.3s;
+}
+
+@keyframes smoke_scale {
+  0% {
+    transform: scale(0.1);
+  }
+  20% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(0.1);
+    opacity: 0;
+  }
+}
