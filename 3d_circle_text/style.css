@@ -1,0 +1,93 @@
+:root {
+  --main-color: #6839b8;
+  --sub-color: #422477;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--main-color);
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.scene {
+  width: 100px;
+  height: 50px;
+  position: relative;
+  perspective: 1000px;
+}
+
+.carousel {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  animation: rotate 5s linear forwards infinite alternate;
+  -webkit-animation: rotate 5s linear forwards infinite alternate;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotateX(20deg) rotateY(0deg);
+    -webkit-transform: rotateX(20deg) rotateY(0deg);
+    -moz-transform: rotateX(20deg) rotateY(0deg);
+    -ms-transform: rotateX(20deg) rotateY(0deg);
+    -o-transform: rotateX(20deg) rotateY(0deg);
+  }
+  33% {
+    transform: rotateX(-20deg) rotateY(120deg);
+    -webkit-transform: rotateX(-20deg) rotateY(120deg);
+    -moz-transform: rotateX(-20deg) rotateY(120deg);
+    -ms-transform: rotateX(-20deg) rotateY(120deg);
+    -o-transform: rotateX(-20deg) rotateY(120deg);
+  }
+  66% {
+    transform: rotateX(20deg) rotateY(240deg);
+    -webkit-transform: rotateX(20deg) rotateY(240deg);
+    -moz-transform: rotateX(20deg) rotateY(240deg);
+    -ms-transform: rotateX(20deg) rotateY(240deg);
+    -o-transform: rotateX(20deg) rotateY(240deg);
+  }
+  100% {
+    transform: rotateX(-20deg) rotateY(360deg);
+    -webkit-transform: rotateX(-20deg) rotateY(360deg);
+    -moz-transform: rotateX(-20deg) rotateY(360deg);
+    -ms-transform: rotateX(-20deg) rotateY(360deg);
+    -o-transform: rotateX(-20deg) rotateY(360deg);
+  }
+}
+
+.carousel__cell {
+  position: absolute;
+  width: 56px;
+  height: 120px;
+  background-color: white;
+  border-top: 5px solid var(--sub-color);
+  border-bottom: 5px solid var(--sub-color);
+  transform: rotateY(calc(var(--i) * 15deg)) translateZ(205px);
+  -webkit-transform: rotateY(calc(var(--i) * 15deg)) translateZ(205px);
+  -moz-transform: rotateY(calc(var(--i) * 15deg)) translateZ(205px);
+  -ms-transform: rotateY(calc(var(--i) * 15deg)) translateZ(205px);
+  -o-transform: rotateY(calc(var(--i) * 15deg)) translateZ(205px);
+}
+
+.carousel__cell:before {
+  content: attr(data-text);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  color: black;
+  font-size: 2rem;
+  font-weight: bolder;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
