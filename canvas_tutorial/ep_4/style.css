@@ -1,0 +1,15 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* 
+
+캔버스 태그가 아닌 css로 크기를 지정하면 
+- 픽셀 깨짐현상 발생
+- 마우스 커서 위치 어긋남 현상 발생 
+
+#canvas1 {
+  width: 500px;
+  height: 300px;
+} */
