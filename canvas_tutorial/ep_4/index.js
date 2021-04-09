@@ -20,36 +20,16 @@ class Particle {
     this._fillStyle = fillStyle;
     this._canvasHeight = canvasHeight;
     this._canvasWidth = canvasWidth;
-    this._mouse = {};
-  }
-
-  set mouse(newMouse) {
-    this._mouse = newMouse;
+    this._collided = false;
   }
 
   get radius() {
-    if (
-      this._mouse.x - this._x < 25 &&
-      this._mouse.x - this._x > -25 &&
-      this._mouse.y - this._y < 25 &&
-      this._mouse.y - this._y > -25 &&
-      this._radius < 20
-    ) {
-      this._radius += 1;
-    } else if (this._radius > this._initRadius) {
-      this._radius -= 1;
-    }
-
     return this._radius;
   }
 
   set radius(number) {
-    if (number > 20) return;
+    if (number > 20 || number < this._initRadius) return;
     this._radius = number;
-  }
-
-  initRadius() {
-    this.radius = this._initRadius;
   }
 
   get dx() {
@@ -75,6 +55,12 @@ class Particle {
   update() {
     this._x += this.dx;
     this._y += this.dy;
+
+    if (this._collided) {
+      this.radius += 1;
+    } else {
+      this.radius -= 1;
+    }
   }
 
   draw() {
@@ -87,6 +73,14 @@ class Particle {
   animate() {
     this.update();
     this.draw();
+  }
+
+  checkCollision(mouse) {
+    this._collided =
+      mouse.x - this._x < 25 &&
+      mouse.x - this._x > -25 &&
+      mouse.y - this._y < 25 &&
+      mouse.y - this._y > -25;
   }
 }
 
@@ -140,9 +134,9 @@ class ParticleController {
     requestAnimationFrame(this._animate);
   }
 
-  setMouse(mouse) {
+  checkCollisions(mouse) {
     this._particles.forEach((p) => {
-      p.mouse = mouse;
+      p.checkCollision(mouse);
     });
   }
 }
@@ -162,7 +156,7 @@ function init() {
   });
 
   window.addEventListener("mousemove", (e) => {
-    particleController.setMouse({
+    particleController.checkCollisions({
       x: e.x,
       y: e.y,
     });
