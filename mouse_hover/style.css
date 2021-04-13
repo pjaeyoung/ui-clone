@@ -1,0 +1,226 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  cursor: none;
+  overflow: hidden;
+}
+
+body {
+  background-color: #d53f41;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  padding: 30px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header #logo {
+  width: 80px;
+}
+
+header #btn-menu {
+  height: 100%;
+  width: 80px;
+  position: relative;
+  border: none;
+  background: none;
+}
+
+#btn-menu::before {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 10px;
+  height: 2px;
+  width: 45px;
+  background-color: #fff;
+  transform: translateX(3px);
+  -webkit-transform: translateX(3px);
+  -moz-transform: translateX(3px);
+  -ms-transform: translateX(3px);
+  -o-transform: translateX(3px);
+  transition: 0.2s ease;
+  -webkit-transition: 0.2s ease;
+  -moz-transition: 0.2s ease;
+  -ms-transition: 0.2s ease;
+  -o-transition: 0.2s ease;
+}
+
+#btn-menu::after {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 20px;
+  height: 3px;
+  width: 45px;
+  background-color: #fff;
+  transform: translateX(-3px);
+  -webkit-transform: translateX(-3px);
+  -moz-transform: translateX(-3px);
+  -ms-transform: translateX(-3px);
+  -o-transform: translateX(-3px);
+  transition: 0.2s ease;
+  -webkit-transition: 0.2s ease;
+  -moz-transition: 0.2s ease;
+  -ms-transition: 0.2s ease;
+  -o-transition: 0.2s ease;
+}
+
+#btn-menu.active::before {
+  transform: translateX(0px);
+  -webkit-transform: translateX(0px);
+  -moz-transform: translateX(0px);
+  -ms-transform: translateX(0px);
+  -o-transform: translateX(0px);
+}
+
+#btn-menu.active::after {
+  transform: translateX(0px);
+  -webkit-transform: translateX(0px);
+  -moz-transform: translateX(0px);
+  -ms-transform: translateX(0px);
+  -o-transform: translateX(0px);
+}
+
+.text-container {
+  position: absolute;
+  left: 120px;
+  bottom: 180px;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  font-size: calc(100vw / 20 + 5px);
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.title span:last-of-type {
+  color: transparent;
+  -webkit-text-stroke: 2px#f9c836;
+}
+
+.subtitle {
+  color: white;
+  font-size: calc(100vw / 35 + 2px);
+}
+
+.img-container {
+  position: absolute;
+  right: 20px;
+  top: 100px;
+  width: 70%;
+  min-width: 500px;
+  height: 80vh;
+  z-index: -1;
+}
+
+.img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+footer {
+  position: absolute;
+  color: #f9c836;
+  bottom: 50px;
+  left: 150px;
+  font-size: calc(100vw / 80);
+}
+
+.custom-cursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #f9c836;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  transition: transform 0.5s ease;
+  -webkit-transition: transform 0.5s ease;
+  -moz-transition: transform 0.5s ease;
+  -ms-transition: transform 0.5s ease;
+  -o-transition: transform 0.5s ease;
+  transform: scale(1);
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  z-index: 1000;
+}
+
+.custom-cursor.active {
+  transform: scale(4);
+  -webkit-transform: scale(4);
+  -moz-transform: scale(4);
+  -ms-transform: scale(4);
+  -o-transform: scale(4);
+  background-color: transparent;
+  border: 1px solid #f9c836;
+}
+
+.custom-cursor.active + .cursor-text {
+  color: white;
+}
+
+.cursor-text {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 10px;
+  height: 10px;
+  font-size: 12px;
+  color: transparent;
+}
+
+.cursor-tail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #f9c836;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  opacity: 0;
+}
+
+.cursor-tail.active {
+  opacity: 1;
+}
+
+@media screen and (max-width: 800px) {
+  .title {
+    font-size: 3rem;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+  }
+
+  footer {
+    left: 100px;
+    font-size: 1rem;
+  }
+}
