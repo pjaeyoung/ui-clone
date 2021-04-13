@@ -141,14 +141,24 @@ footer {
   font-size: calc(100vw / 80);
 }
 
-.custom-cursor {
+.cursor-wrapper {
   position: absolute;
   top: 0;
   left: 0;
-  background-color: #f9c836;
-  border-radius: 50%;
   width: 25px;
   height: 25px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+
+.custom-cursor {
+  background-color: #f9c836;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
@@ -163,10 +173,9 @@ footer {
   -moz-transform: scale(1);
   -ms-transform: scale(1);
   -o-transform: scale(1);
-  z-index: 1000;
 }
 
-.custom-cursor.active {
+.cursor-wrapper.active .custom-cursor {
   transform: scale(4);
   -webkit-transform: scale(4);
   -moz-transform: scale(4);
@@ -176,19 +185,22 @@ footer {
   border: 1px solid #f9c836;
 }
 
-.custom-cursor.active + .cursor-text {
-  color: white;
-}
-
 .cursor-text {
   position: absolute;
+  left: 8px;
+  top: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 10px;
   height: 10px;
   font-size: 12px;
-  color: transparent;
+  color: white;
+  opacity: 0;
+}
+
+.cursor-wrapper.active .cursor-text {
+  opacity: 1;
 }
 
 .cursor-tail {
