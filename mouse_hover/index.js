@@ -26,12 +26,7 @@ window.addEventListener("mousemove", (e) => {
   mouse.x = e.x;
   mouse.y = e.y;
 
-  if (
-    mouse.x + cursorHalfWidth > imgRect.x &&
-    mouse.x - cursorHalfWidth < imgRect.x + imgRect.width &&
-    mouse.y + cursorHalfHeight > imgRect.y &&
-    mouse.y - cursorHalfWidth < imgRect.y + imgRect.height
-  ) {
+  if (checkCursorCollision(imgRect)) {
     $cursor.classList.add("active");
     $cursorTail.classList.remove("active");
   } else {
@@ -39,12 +34,7 @@ window.addEventListener("mousemove", (e) => {
     $cursorTail.classList.add("active");
   }
 
-  if (
-    mouse.x + cursorHalfWidth > btnRect.x &&
-    mouse.x - cursorHalfWidth < btnRect.x + btnRect.width &&
-    mouse.y + cursorHalfHeight > btnRect.y &&
-    mouse.y - cursorHalfWidth < btnRect.y + btnRect.height
-  ) {
+  if (checkCursorCollision(btnRect)) {
     $btnMenu.classList.add("active");
   } else {
     $btnMenu.classList.remove("active");
@@ -55,6 +45,15 @@ window.addEventListener("mousemove", (e) => {
   $cursorText.style.top = `${mouse.y - $cursorText.clientHeight / 2}px`;
   $cursorText.style.left = `${mouse.x - $cursorText.clientWidth / 2}px`;
 });
+
+function checkCursorCollision(rect) {
+  return (
+    mouse.x + cursorHalfWidth > rect.x &&
+    mouse.x - cursorHalfWidth < rect.x + rect.width &&
+    mouse.y + cursorHalfHeight > rect.y &&
+    mouse.y - cursorHalfWidth < rect.y + rect.height
+  );
+}
 
 function followCursor() {
   const tail_x = parseInt($cursorTail.style.left.replace("px", "")) || 0;
