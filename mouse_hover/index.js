@@ -85,16 +85,26 @@ window.addEventListener("mousemove", (e) => {
   customCursor.pos = { x: e.x, y: e.y };
 });
 
-function followCursor() {
-  const tail_x = parseInt($cursorTail.style.left.replace("px", "")) || 0;
-  const tail_y = parseInt($cursorTail.style.top.replace("px", "")) || 0;
-  $cursorTail.style.top = `${Math.round(
-    tail_y + (customCursor.pos.y - $cursorTail.clientHeight / 2 - tail_y) / 10
-  )}px`;
-  $cursorTail.style.left = `${Math.round(
-    tail_x + (customCursor.pos.x - $cursorTail.clientWidth / 2 - tail_x) / 10
-  )}px`;
-  requestAnimationFrame(followCursor);
+function createFollowCursor({ $cursorTail, smooth = 10 }) {
+  if (!($cursorTail instanceof HTMLElement)) {
+    throw new Error(
+      "$cursorTail은 필수 인자로 HTMLElement의 인스턴스여야 합니다"
+    );
+  }
+
+  return function followCursor() {
+    const tail_x = parseInt($cursorTail.style.left.replace("px", "")) || 0;
+    const tail_y = parseInt($cursorTail.style.top.replace("px", "")) || 0;
+    $cursorTail.style.top = `${Math.round(
+      tail_y +
+        (customCursor.pos.y - $cursorTail.clientHeight / 2 - tail_y) / smooth
+    )}px`;
+    $cursorTail.style.left = `${Math.round(
+      tail_x +
+        (customCursor.pos.x - $cursorTail.clientWidth / 2 - tail_x) / smooth
+    )}px`;
+    requestAnimationFrame(followCursor);
+  };
 }
 
-requestAnimationFrame(followCursor);
+requestAnimationFrame(createFollowCursor({ $cursorTail }));
