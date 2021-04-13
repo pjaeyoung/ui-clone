@@ -1,68 +1,98 @@
-const $cursor = document.querySelector(".custom-cursor");
-const cursorHalfHeight = $cursor.clientHeight / 2;
-const cursorHalfWidth = $cursor.clientWidth / 2;
+class CustomCursor {
+  constructor({ $target }) {
+    this._$target = $target;
+    this._radius = $target.clientHeight / 2;
+    this._pos = {
+      x: null,
+      y: null,
+    };
+    this.collisonEvent = [];
+  }
 
-const $cursorText = document.querySelector(".cursor-text");
+  get pos() {
+    return { ...this._pos };
+  }
 
-const mouse = {
-  x: null,
-  y: null,
-};
+  set pos(newPos) {
+    this._pos = newPos;
+    this._$target.style.top = `${newPos.y - this.radius}px`;
+    this._$target.style.left = `${newPos.x - this.radius}px`;
 
-const $img = document.querySelector(".img-container");
-let imgRect = $img.getBoundingClientRect();
+    this.collisonEvent.forEach((event) => {
+      if (this.checkCursorCollision(event.target)) {
+        event.activate();
+      } else {
+        event.inactviate();
+      }
+    });
+  }
 
-const $btnMenu = document.querySelector("#btn-menu");
-let btnRect = $btnMenu.getBoundingClientRect();
+  get radius() {
+    return this._radius;
+  }
+
+  get $target() {
+    return this._$target;
+  }
+
+  registerCollisionEvent({ target, activateFn, inactivateFn }) {
+    this.collisonEvent.push({
+      target,
+      activate: activateFn,
+      inactviate: inactivateFn,
+    });
+  }
+
+  checkCursorCollision(rect) {
+    return (
+      this._pos.x + this._radius > rect.x &&
+      this._pos.x - this._radius < rect.x + rect.width &&
+      this._pos.y + this._radius > rect.y &&
+      this._pos.y - this._radius < rect.y + rect.height
+    );
+  }
+}
+
+const customCursor = new CustomCursor({
+  $target: document.querySelector(".cursor-wrapper"),
+});
 
 const $cursorTail = document.querySelector(".cursor-tail");
+customCursor.registerCollisionEvent({
+  target: document.querySelector(".img-container").getBoundingClientRect(),
+  activateFn: () => {
+    customCursor._$target.classList.add("active");
+    $cursorTail.classList.remove("active");
+  },
+  inactivateFn: () => {
+    customCursor._$target.classList.remove("active");
+    $cursorTail.classList.add("active");
+  },
+});
 
-window.addEventListener("resize", () => {
-  imgRect = $img.getBoundingClientRect();
-  btnRect = $btnMenu.getBoundingClientRect();
+const $btnMenu = document.querySelector("#btn-menu");
+customCursor.registerCollisionEvent({
+  target: $btnMenu.getBoundingClientRect(),
+  activateFn: () => {
+    $btnMenu.classList.add("active");
+  },
+  inactivateFn: () => {
+    $btnMenu.classList.remove("active");
+  },
 });
 
 window.addEventListener("mousemove", (e) => {
-  mouse.x = e.x;
-  mouse.y = e.y;
-
-  if (checkCursorCollision(imgRect)) {
-    $cursor.classList.add("active");
-    $cursorTail.classList.remove("active");
-  } else {
-    $cursor.classList.remove("active");
-    $cursorTail.classList.add("active");
-  }
-
-  if (checkCursorCollision(btnRect)) {
-    $btnMenu.classList.add("active");
-  } else {
-    $btnMenu.classList.remove("active");
-  }
-
-  $cursor.style.top = `${mouse.y - cursorHalfHeight}px`;
-  $cursor.style.left = `${mouse.x - cursorHalfWidth}px`;
-  $cursorText.style.top = `${mouse.y - $cursorText.clientHeight / 2}px`;
-  $cursorText.style.left = `${mouse.x - $cursorText.clientWidth / 2}px`;
+  customCursor.pos = { x: e.x, y: e.y };
 });
-
-function checkCursorCollision(rect) {
-  return (
-    mouse.x + cursorHalfWidth > rect.x &&
-    mouse.x - cursorHalfWidth < rect.x + rect.width &&
-    mouse.y + cursorHalfHeight > rect.y &&
-    mouse.y - cursorHalfWidth < rect.y + rect.height
-  );
-}
 
 function followCursor() {
   const tail_x = parseInt($cursorTail.style.left.replace("px", "")) || 0;
   const tail_y = parseInt($cursorTail.style.top.replace("px", "")) || 0;
   $cursorTail.style.top = `${Math.round(
-    tail_y + (mouse.y - $cursorTail.clientHeight / 2 - tail_y) / 10
+    tail_y + (customCursor.pos.y - $cursorTail.clientHeight / 2 - tail_y) / 10
   )}px`;
   $cursorTail.style.left = `${Math.round(
-    tail_x + (mouse.x - $cursorTail.clientWidth / 2 - tail_x) / 10
+    tail_x + (customCursor.pos.x - $cursorTail.clientWidth / 2 - tail_x) / 10
   )}px`;
   requestAnimationFrame(followCursor);
 }
