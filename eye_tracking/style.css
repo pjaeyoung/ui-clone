@@ -1,0 +1,116 @@
+:root {
+  --color-blue: #4d5cc8;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  outline: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #eae4d7;
+}
+
+.title {
+  position: relative;
+  color: var(--color-blue);
+  cursor: default;
+}
+
+.title::before {
+  position: absolute;
+  bottom: -10px;
+  content: "";
+  width: 100px;
+  transform: translateX(-50px);
+  opacity: 0;
+  border-bottom: 5px solid var(--color-blue);
+  -webkit-transform: translateX(-50px);
+  -moz-transform: translateX(-50px);
+  -ms-transform: translateX(-50px);
+  -o-transform: translateX(-50px);
+  transition: all 0.2s ease;
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+}
+
+.word {
+  display: inline-block;
+  margin-right: 5px;
+  transform: translateX(-50px);
+  -webkit-transform: translateX(-50px);
+  -moz-transform: translateX(-50px);
+  -ms-transform: translateX(-50px);
+  -o-transform: translateX(-50px);
+  transition: transform calc(var(--i) * 0.08s + 0.3s)
+    cubic-bezier(0.215, 0.61, 0.355, 1);
+  -webkit-transition: transform calc(var(--i) * 0.08s + 0.3s);
+  -moz-transition: transform calc(var(--i) * 0.08s + 0.3s);
+  -ms-transition: transform calc(var(--i) * 0.08s + 0.3s);
+  -o-transition: transform calc(var(--i) * 0.08s + 0.3s);
+}
+
+.title:hover .word {
+  transform: translateX(0px);
+  -webkit-transform: translateX(0px);
+  -moz-transform: translateX(0px);
+  -ms-transform: translateX(0px);
+  -o-transform: translateX(0px);
+}
+
+.title:hover::before {
+  opacity: 1;
+  transform: translateX(50px);
+  -webkit-transform: translateX(50px);
+  -moz-transform: translateX(50px);
+  -ms-transform: translateX(50px);
+  -o-transform: translateX(50px);
+}
+
+.eyes {
+  width: 200px;
+  height: 200px;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.eye {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border: 2px solid var(--color-blue);
+  border-radius: 25px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  -ms-border-radius: 25px;
+  -o-border-radius: 25px;
+}
+
+.pupil {
+  position: absolute;
+  top: calc(50% - 10px);
+  left: calc(50% - 10px);
+  width: 20px;
+  height: 20px;
+  background-color: var(--color-blue);
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
