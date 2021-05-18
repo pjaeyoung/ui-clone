@@ -1,0 +1,68 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.sec-01 {
+  width: 100%;
+  height: calc(100vh * 1.5);
+  background-image: url("./bg.jpg");
+  background-size: cover;
+}
+
+.wrap {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+
+.circle-img {
+  position: fixed;
+  width: 100px;
+  height: 100px;
+  mix-blend-mode: darken;
+}
+
+/* .circle-img::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url("./bg.jpg");
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+} */
+
+.circle-img::before {
+  content: "Art";
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: #33338b;
+  font-size: 2rem;
+  font-weight: bold;
+  font-family: monospace;
+  background-color: #9d87b8;
+  box-shadow: 0px 5px 10px 2px rgba(32, 12, 31, 0.4);
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
