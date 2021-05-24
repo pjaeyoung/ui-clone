@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+section {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bg-pink {
+  background-color: #ff7b54;
+}
+
+.bg-yellow {
+  background-color: #ffd56b;
+}
+
+.bg-green {
+  background-color: #939b62;
+}
+
+.title {
+  opacity: 0;
+  color: white;
+  font-size: 5rem;
+  transition: opacity 1s linear;
+  -webkit-transition: opacity 1s linear;
+  -moz-transition: opacity 1s linear;
+  -ms-transition: opacity 1s linear;
+  -o-transition: opacity 1s linear;
+}
+
+section.active .title {
+  opacity: 1;
+}
